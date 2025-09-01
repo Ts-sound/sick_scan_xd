@@ -154,8 +154,8 @@ int main(int argc, char** argv)
   ros::NodeHandle nh("~");
   rosNodePtr node = &nh;
 #endif
-  signal(SIGINT, rosSignalHandler);  // SIGINT = 2, Ctrl-C or kill -2
-  signal(SIGTERM, rosSignalHandler); // SIGTERM = 15, default kill level
+  // signal(SIGINT, rosSignalHandler);  // SIGINT = 2, Ctrl-C or kill -2
+  // signal(SIGTERM, rosSignalHandler); // SIGTERM = 15, default kill level
 
   ROS_INFO_STREAM(versionInfo);
   for (int i = 0; i < argc_tmp; i++)

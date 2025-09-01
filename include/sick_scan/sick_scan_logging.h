@@ -102,10 +102,16 @@ int32_t getVerboseLevel();
 
 #if __ROS_VERSION <= 1 // i.e. native Linux or Windows or ROS-1
 
-#define SICK_INFO_LOG(ros_level,...) do{ std::string _msg=vargs_to_string(__VA_ARGS__); if(ros_level>=getVerboseLevel()){ROS_LOG(ros_level,ROSCONSOLE_DEFAULT_NAME,__VA_ARGS__);} notifyLogMessageListener(ros_level,_msg); }while(0)
-#define SICK_INFO_LOG_STREAM(ros_level,args) do{ std::stringstream _msg; _msg<<args; if(ros_level>=getVerboseLevel()){ROS_LOG_STREAM(ros_level,ROSCONSOLE_DEFAULT_NAME,args);} notifyLogMessageListener(ros_level,_msg.str()); }while(0)
-#define SICK_ERROR_LOG(ros_level,diag_status,...) do{ std::string _msg=vargs_to_string(__VA_ARGS__); setDiagnosticStatus(diag_status,_msg); if(ros_level>=getVerboseLevel()){ROS_LOG(ros_level,ROSCONSOLE_DEFAULT_NAME,__VA_ARGS__);} notifyLogMessageListener(ros_level,_msg); }while(0)
-#define SICK_ERROR_LOG_STREAM(ros_level,diag_status,args) do{ std::stringstream _msg; _msg<<args; setDiagnosticStatus(diag_status,_msg.str()); if(ros_level>=getVerboseLevel()){ROS_LOG_STREAM(ros_level,ROSCONSOLE_DEFAULT_NAME,args);} notifyLogMessageListener(ros_level,_msg.str()); }while(0)
+#define SICK_INFO_LOG(ros_level,...) 
+#define SICK_INFO_LOG_STREAM(ros_level,args) 
+#define SICK_ERROR_LOG(ros_level,diag_status,...) 
+#define SICK_ERROR_LOG_STREAM(ros_level,diag_status,args) 
+
+
+// #define SICK_INFO_LOG(ros_level,...) do{ std::string _msg=vargs_to_string(__VA_ARGS__); ROS_LOG(ros_level,ROSCONSOLE_DEFAULT_NAME,__VA_ARGS__); notifyLogMessageListener(ros_level,_msg); }while(0)
+// #define SICK_INFO_LOG_STREAM(ros_level,args) do{ std::stringstream _msg; _msg<<args; ROS_LOG_STREAM(ros_level,ROSCONSOLE_DEFAULT_NAME,args); notifyLogMessageListener(ros_level,_msg.str()); }while(0)
+// #define SICK_ERROR_LOG(ros_level,diag_status,...) do{ std::string _msg=vargs_to_string(__VA_ARGS__); setDiagnosticStatus(diag_status,_msg); ROS_LOG(ros_level,ROSCONSOLE_DEFAULT_NAME,__VA_ARGS__); notifyLogMessageListener(ros_level,_msg); }while(0)
+// #define SICK_ERROR_LOG_STREAM(ros_level,diag_status,args) do{ std::stringstream _msg; _msg<<args; setDiagnosticStatus(diag_status,_msg.str()); ROS_LOG_STREAM(ros_level,ROSCONSOLE_DEFAULT_NAME,args); notifyLogMessageListener(ros_level,_msg.str()); }while(0)
 
 #undef ROS_DEBUG
 #undef ROS_DEBUG_STREAM

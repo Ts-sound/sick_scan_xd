@@ -657,7 +657,7 @@ SickScanApiHandle SickScanApiCreate(int argc, char** argv)
         SickScanApiHandle apiHandle = new ros::NodeHandle("~");
         #endif
 
-        signal(SIGINT, rosSignalHandler);
+        // signal(SIGINT, rosSignalHandler);
         ROS_INFO_STREAM(versionInfo);
 
         if (argc > 0 && argv != 0 && argv[0] != 0)

@@ -284,6 +284,13 @@ sick_scansegment_xd::RosMsgpackPublisher::RosMsgpackPublisher(const std::string&
 		initLFPlayerFilterSettings(config.host_LFPlayerFilter);
 	}
 	std::string imu_topic = config.imu_topic;
+
+	// enable imu
+	if (config.imu_enable){
+		// m_publisher_imu = m_node->advertise<ros_sensor_msgs::Imu>("imu", 5);
+		m_publisher_imu_initialized = true;
+	}
+
 #if defined __ROS_VERSION && __ROS_VERSION > 1 // ROS-2 publisher
 	rosQoS qos = rclcpp::SystemDefaultsQoS();
 	QoSConverter qos_converter;
@@ -994,11 +1001,13 @@ void sick_scansegment_xd::RosMsgpackPublisher::HandleMsgPackData(const sick_scan
 			for (int pointIdx = 0; pointIdx < scanline.size(); pointIdx++)
 			{
 				const sick_scansegment_xd::ScanSegmentParserOutput::LidarPoint& point = scanline[pointIdx];
+
+				// 将光强 改成 反光板标记 point.i -> point.reflectorbit   
 				lidar_points[echoIdx].push_back(sick_scansegment_xd::PointXYZRAEI32f(point.x, point.y, point.z, point.range,
-				   point.azimuth, point.elevation, point.i, point.groupIdx, point.echoIdx, point.lidar_timestamp_microsec, point.reflectorbit));
+				   point.azimuth, point.elevation, point.reflectorbit, point.groupIdx, point.echoIdx, point.lidar_timestamp_microsec, point.reflectorbit));
 				lidar_points_min_azimuth = std::min(lidar_points_min_azimuth, point.azimuth);
 				lidar_points_max_azimuth = std::max(lidar_points_max_azimuth, point.azimuth);
-    		lidar_timestamp_start_microsec = std::min(lidar_timestamp_start_microsec, point.lidar_timestamp_microsec);
+				lidar_timestamp_start_microsec = std::min(lidar_timestamp_start_microsec, point.lidar_timestamp_microsec);
 			}
 		}
 	}

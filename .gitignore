@@ -144,3 +144,4 @@ test/docker/data
 tools/pandoc/
 
 test/docker/images/
+sick_scan_xd-3.7.0.zip

@@ -404,7 +404,7 @@ bool parseLaunchfileSetParameter(rosNodePtr nhPriv, int argc, char **argv)
       if (launchArgcFileIdx != n)
       {
           ROS_ERROR_STREAM("## ERROR parseLaunchfileSetParameter(): Tag-Value setting not valid. Use pattern: <tag>:=<value>  (e.g. hostname:=192.168.0.4) (Check the entry: " << argv_str << ")\n");
-          return false;
+          // return false;
       }
     }
   }

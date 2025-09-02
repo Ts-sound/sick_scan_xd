@@ -1,0 +1,1 @@
+rm sick_scan_xd-3.7.0.zip && git archive --format zip --output sick_scan_xd-3.7.0.zip HEAD
